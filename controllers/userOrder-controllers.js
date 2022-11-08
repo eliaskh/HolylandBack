@@ -1,13 +1,13 @@
 const HttpError = require('../models/http-error');
 const { v4: uuid } = require('uuid');
 const { validationResult } = require('express-validator');
-const Order = require('../models/orders');
+const UserOrder = require('../models/userOrder');
 const User = require('../models/user');
 
 const getOrders = async (req, res, next) => {
   let orders;
   try {
-    orders = await Order.find();
+    orders = await UserOrder.find();
   } catch (err) {
     const error = new HttpError('can not find the users', 5000);
     return next(error);
@@ -27,8 +27,10 @@ const addOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    name,
+    email,
   } = req.body;
-  const newOrder = new Order({
+  const newOrder = new UserOrder({
     considerTourLeader,
     tourGuideName,
     tourLeaderC,
@@ -38,6 +40,8 @@ const addOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    name,
+    email,
   });
   console.log(newOrder);
   newOrder
@@ -55,7 +59,7 @@ const deleteOrder = async (req, res, next) => {
   const OrderId = req.params.pid;
   let order;
   try {
-    order = await Order.findById(OrderId);
+    order = await UserOrder.findById(OrderId);
   } catch (err) {
     const error = new HttpError('can not delete the order', 500);
     return next(error);
@@ -74,7 +78,7 @@ const getOrderById = async (req, res, next) => {
 
   let order;
   try {
-    order = await Order.findById(orderId);
+    order = await UserOrder.findById(orderId);
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not find this shop',
@@ -105,11 +109,13 @@ const updateOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    name,
+    email,
   } = req.body;
   const orderId = req.params.pid;
   let order;
   try {
-    order = await Order.findById(orderId);
+    order = await UserOrder.findById(orderId);
   } catch (err) {
     console.log('Error', err);
     const error = new HttpError(
@@ -129,6 +135,8 @@ const updateOrder = async (req, res, next) => {
     order.productsList = productsList;
     order.customerOrders = customerOrders;
     order.userId = userId;
+    order.name = name;
+    order.name = email;
 
     order
       .save()

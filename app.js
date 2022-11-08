@@ -9,6 +9,7 @@ const userTourRoutes = require('./routes/userTour-routes');
 const counterRoutes = require('./routes/counter-routes');
 const orderRoutes = require('./routes/order-routes');
 const productRoutes = require('./routes/product-routes');
+const userOrdersRoutes = require('./routes/userOrders-routes');
 const app = express();
 const HttpError = require('./models/http-error');
 
@@ -55,6 +56,7 @@ app.use('/api/usertours', userTourRoutes);
 app.use('/api/counter', counterRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/product', productRoutes);
+app.use('/api/useroders', userOrdersRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route', 404);
