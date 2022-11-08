@@ -11,6 +11,7 @@ const orderRoutes = require('./routes/order-routes');
 const productRoutes = require('./routes/product-routes');
 const userOrdersRoutes = require('./routes/userOrders-routes');
 const app = express();
+const AppPort=process.env.PORT || 5000
 const HttpError = require('./models/http-error');
 
 const fileUpload = require('express-fileupload');
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
 
 app.use(
   fileUpload({
-    useTempFiles: true,
+    useTempFiles: true
   })
 );
 
@@ -85,13 +86,13 @@ mongoose
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
-      useFindAndModify: false,
+      useFindAndModify: false
     }
   )
 
   .then(() => {
     console.log('server is listening now');
-    app.listen(5000);
+    app.listen(AppPort);
   })
   .catch((err) => {
     console.log(err);
