@@ -1,6 +1,6 @@
 const HttpError = require('../models/http-error')
 const { v4: uuid } = require('uuid')
-const Counter = require('../models/Counter')
+const Counter = require('../models/counter')
 const fs = require('fs')
 
 
