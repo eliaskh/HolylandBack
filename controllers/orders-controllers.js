@@ -27,6 +27,7 @@ const addOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    statusofOrder,
   } = req.body;
   const newOrder = new Order({
     considerTourLeader,
@@ -38,6 +39,7 @@ const addOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    statusofOrder,
   });
   console.log(newOrder);
   newOrder
@@ -105,6 +107,7 @@ const updateOrder = async (req, res, next) => {
     productsList,
     customerOrders,
     userId,
+    statusofOrder,
   } = req.body;
   const orderId = req.params.pid;
   let order;
@@ -129,6 +132,7 @@ const updateOrder = async (req, res, next) => {
     order.productsList = productsList;
     order.customerOrders = customerOrders;
     order.userId = userId;
+    order.statusofOrder = statusofOrder;
 
     order
       .save()

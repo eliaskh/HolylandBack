@@ -14,5 +14,6 @@ const orderScehma = new Schema({
   productsList: [],
   customerOrders: [],
   userId: { type: String, required: false },
+  statusofOrder: { type: String, required: false },
 });
 module.exports = mongoose.model('Order', orderScehma);

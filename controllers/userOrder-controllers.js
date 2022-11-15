@@ -29,6 +29,7 @@ const addOrder = async (req, res, next) => {
     userId,
     name,
     email,
+    shopId,
   } = req.body;
   const newOrder = new UserOrder({
     considerTourLeader,
@@ -42,6 +43,7 @@ const addOrder = async (req, res, next) => {
     userId,
     name,
     email,
+    shopId,
   });
   console.log(newOrder);
   newOrder
@@ -111,6 +113,7 @@ const updateOrder = async (req, res, next) => {
     userId,
     name,
     email,
+    shopId,
   } = req.body;
   const orderId = req.params.pid;
   let order;
@@ -136,7 +139,8 @@ const updateOrder = async (req, res, next) => {
     order.customerOrders = customerOrders;
     order.userId = userId;
     order.name = name;
-    order.name = email;
+    order.email = email;
+    order.shopId = shopId;
 
     order
       .save()
