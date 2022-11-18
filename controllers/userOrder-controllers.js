@@ -30,6 +30,7 @@ const addOrder = async (req, res, next) => {
     name,
     email,
     shopId,
+    sid,
   } = req.body;
   const newOrder = new UserOrder({
     considerTourLeader,
@@ -44,6 +45,7 @@ const addOrder = async (req, res, next) => {
     name,
     email,
     shopId,
+    sid,
   });
   console.log(newOrder);
   newOrder

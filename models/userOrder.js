@@ -17,5 +17,6 @@ const userOrderScehma = new Schema({
   name: { type: String, required: false },
   email: { type: String },
   shopId: { type: String, required: false },
+  sid: { type: String, required: false },
 });
 module.exports = mongoose.model('UserOrder', userOrderScehma);
