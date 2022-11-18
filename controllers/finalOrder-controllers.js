@@ -30,6 +30,7 @@ const addFinalOrder = async (req, res, next) => {
     statusofOrder,
     sid,
     deliveryTime,
+    deliveryDate,
     deliveryLocation,
   } = req.body;
   const newOrder = new FinalOrder({
@@ -45,6 +46,7 @@ const addFinalOrder = async (req, res, next) => {
     statusofOrder,
     sid,
     deliveryTime,
+    deliveryDate,
     deliveryLocation,
   });
   console.log(newOrder);

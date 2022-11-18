@@ -17,6 +17,7 @@ const finalorderScehma = new Schema({
   statusofOrder: { type: String, required: false },
   sid: { type: String, required: false },
   deliveryTime: { type: String, required: false },
+  deliveryDate: { type: String, required: false },
   deliveryLocation: { type: String, required: false },
 });
 module.exports = mongoose.model('FinalOrder', finalorderScehma);
