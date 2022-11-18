@@ -10,8 +10,9 @@ const counterRoutes = require('./routes/counter-routes');
 const orderRoutes = require('./routes/order-routes');
 const productRoutes = require('./routes/product-routes');
 const userOrdersRoutes = require('./routes/userOrders-routes');
+const finalOrderRoutes = require('./routes/finaOrder-routes');
 const app = express();
-const AppPort=process.env.PORT || 5000
+const AppPort = process.env.PORT || 5000;
 const HttpError = require('./models/http-error');
 
 const fileUpload = require('express-fileupload');
@@ -42,7 +43,7 @@ app.use((req, res, next) => {
 
 app.use(
   fileUpload({
-    useTempFiles: true
+    useTempFiles: true,
   })
 );
 
@@ -58,6 +59,7 @@ app.use('/api/counter', counterRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/useroders', userOrdersRoutes);
+app.use('/api/finalorder', finalOrderRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route', 404);
@@ -86,7 +88,7 @@ mongoose
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useFindAndModify: false,
     }
   )
 
