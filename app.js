@@ -79,10 +79,6 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(
     'mongodb+srv://holylandapplicat:rffU4JncyyT826Ud@cluster0.qwkwzgk.mongodb.net/?retryWrites=true&w=majority',
-    // 'mongodb+srv://elias:ilovegreece1984@cluster0-e02ov.mongodb.net/places?retryWrites=true&w=majority',
-
-    // 'mongodb+srv://elias:elias@cluster0.jmuxz.mongodb.net/<dbname>?retryWrites=true&w=majority',
-    // 'mongodb+srv://luna:luna@cluster0.czh2u.mongodb.net/<dbname>?retryWrites=true&w=majority',
 
     {
       useNewUrlParser: true,

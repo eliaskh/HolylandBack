@@ -11,5 +11,6 @@ router.post('/add', ordercontrollers.addOrder);
 
 router.delete('/:pid', ordercontrollers.deleteOrder);
 router.put('/:pid', ordercontrollers.updateOrder);
+router.put('/:pid/update-status', ordercontrollers.updateOrderStatus);
 
 module.exports = router;
