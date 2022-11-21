@@ -11,4 +11,6 @@ router.post('/add', finalOrderController.addFinalOrder);
 
 router.delete('/:pid', finalOrderController.deleteFinalOrder);
 
+router.put('/:pid/update-final', finalOrderController.updateFinalOrder);
+
 module.exports = router;
