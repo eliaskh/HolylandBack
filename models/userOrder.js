@@ -16,6 +16,7 @@ const userOrderScehma = new Schema({
   userId: { type: String, required: false },
   name: { type: String, required: false },
   email: { type: String },
+  phoneNumber: { type: String, required: false },
   shopId: { type: String, required: false },
   sid: { type: String, required: false },
 });
