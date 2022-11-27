@@ -17,5 +17,7 @@ const orderScehma = new Schema({
   statusofOrder: { type: String, required: false },
   sid: { type: String, required: false },
   shopTitle: { type: String, required: false },
+  country: {},
+  // country: { type: String, required: false },
 });
 module.exports = mongoose.model('Order', orderScehma);
