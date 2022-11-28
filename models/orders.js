@@ -18,6 +18,7 @@ const orderScehma = new Schema({
   sid: { type: String, required: false },
   shopTitle: { type: String, required: false },
   country: {},
+  guidePhone: { type: String, required: false },
   // country: { type: String, required: false },
 });
 module.exports = mongoose.model('Order', orderScehma);
