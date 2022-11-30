@@ -188,9 +188,39 @@ const updateOrderStatus = async (req, res, next) => {
   }
 };
 
+const updatePhoneNumber = async (req, res, next) => {
+  const { guidePhone } = req.body;
+  const orderId = req.params.pid;
+  let order;
+  try {
+    order = await Order.findById(orderId);
+  } catch (err) {
+    console.log('Error', err);
+    const error = new HttpError(
+      'we can not update your Place details, sorry ',
+      500
+    );
+    return next(error);
+  }
+
+  {
+    order.guidePhone = guidePhone;
+
+    order
+      .save()
+      .then(() => {
+        res.status(200).json({ order: order.toObject({ getters: true }) });
+      })
+      .catch((error) => {
+        res.json({ error });
+      });
+  }
+};
+
 exports.getOrders = getOrders;
 exports.addOrder = addOrder;
 exports.deleteOrder = deleteOrder;
 exports.getOrderById = getOrderById;
 exports.updateOrder = updateOrder;
 exports.updateOrderStatus = updateOrderStatus;
+exports.updatePhoneNumber = updatePhoneNumber;
