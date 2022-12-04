@@ -104,6 +104,36 @@ const updateFinalOrder = async (req, res, next) => {
   }
 };
 
+const updateFinalOrderStatus = async (req, res, next) => {
+  const { statusofOrder } = req.body;
+  const orderId = req.params.pid;
+  let order;
+  try {
+    order = await FinalOrder.findById(orderId);
+  } catch (err) {
+    console.log('Error', err);
+    const error = new HttpError(
+      'we can not update your Place details, sorry ',
+      500
+    );
+    return next(error);
+  }
+
+  {
+    order.statusofOrder = statusofOrder;
+
+    // order.country = country;
+    order
+      .save()
+      .then(() => {
+        res.status(200).json({ order: order.toObject({ getters: true }) });
+      })
+      .catch((error) => {
+        res.json({ error });
+      });
+  }
+};
+
 const deleteFinalOrder = async (req, res, next) => {
   const OrderId = req.params.pid;
   let finalOrder;
@@ -126,3 +156,4 @@ exports.getFinalOrder = getFinalOrder;
 exports.addFinalOrder = addFinalOrder;
 exports.deleteFinalOrder = deleteFinalOrder;
 exports.updateFinalOrder = updateFinalOrder;
+exports.updateFinalOrderStatus = updateFinalOrderStatus;

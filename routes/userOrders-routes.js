@@ -10,6 +10,8 @@ router.get('/', userOrderControllers.getOrders);
 router.post('/add', userOrderControllers.addOrder);
 
 router.delete('/:pid', userOrderControllers.deleteOrder);
+
+router.delete('/:sid/deleteAllOrders', userOrderControllers.deleteAllOrder);
 router.put('/:pid', userOrderControllers.updateOrder);
 
 module.exports = router;

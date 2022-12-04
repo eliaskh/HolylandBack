@@ -156,9 +156,26 @@ const updateOrder = async (req, res, next) => {
       });
   }
 };
-
+const deleteAllOrder = async (req, res, next) => {
+  const OrderId = req.params.sid;
+  let order;
+  try {
+    order = await UserOrder.findById(OrderId);
+  } catch (err) {
+    const error = new HttpError('can not delete the order', 500);
+    return next(error);
+  }
+  try {
+    await order.remove();
+  } catch (err) {
+    const error = new HttpError('can not delete the order', 500);
+    return next(error);
+  }
+  res.status(200).json({ message: 'order deleted' });
+};
 exports.getOrders = getOrders;
 exports.addOrder = addOrder;
 exports.deleteOrder = deleteOrder;
 exports.getOrderById = getOrderById;
 exports.updateOrder = updateOrder;
+exports.deleteAllOrder = deleteAllOrder;
