@@ -34,6 +34,7 @@ const addFinalOrder = async (req, res, next) => {
     deliveryLocation,
     country,
     guidePhone,
+    shopTitle,
   } = req.body;
   const newOrder = new FinalOrder({
     considerTourLeader,
@@ -52,6 +53,7 @@ const addFinalOrder = async (req, res, next) => {
     deliveryLocation,
     country,
     guidePhone,
+    shopTitle,
   });
   console.log(newOrder);
   newOrder
@@ -72,6 +74,8 @@ const updateFinalOrder = async (req, res, next) => {
     deliveryLocation,
     guidePhone,
     customerOrders,
+    statusofOrder,
+    total,
   } = req.body;
   const orderId = req.params.pid;
   let order;
@@ -92,6 +96,8 @@ const updateFinalOrder = async (req, res, next) => {
     order.deliveryLocation = deliveryLocation;
     order.guidePhone = guidePhone;
     order.customerOrders = customerOrders;
+    order.statusofOrder = statusofOrder;
+    order.total = total;
     // order.country = country;
     order
       .save()
