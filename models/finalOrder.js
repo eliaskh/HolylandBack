@@ -22,5 +22,6 @@ const finalorderScehma = new Schema({
   country: {}, //done 16
   guidePhone: { type: String, required: false }, //done 17
   shopTitle: { type: String, required: false }, //18
+  note: { type: String, required: false },
 });
 module.exports = mongoose.model('FinalOrder', finalorderScehma);

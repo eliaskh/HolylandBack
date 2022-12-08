@@ -13,6 +13,7 @@ router.delete('/:pid', finalOrderController.deleteFinalOrder);
 
 router.put('/:pid/update-final', finalOrderController.updateFinalOrder);
 
+router.put('/:pid/update-shop', finalOrderController.updateShop);
 router.put(
   '/:pid/update-final-status',
   finalOrderController.updateFinalOrderStatus
