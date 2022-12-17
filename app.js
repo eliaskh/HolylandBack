@@ -3,10 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const placesRouter = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
-const threeDRoutes = require('./routes/threeD-routes');
-const tourRoutes = require('./routes/tour-routes');
-const userTourRoutes = require('./routes/userTour-routes');
-const counterRoutes = require('./routes/counter-routes');
 const orderRoutes = require('./routes/order-routes');
 const productRoutes = require('./routes/product-routes');
 const userOrdersRoutes = require('./routes/userOrders-routes');
@@ -50,12 +46,7 @@ app.use(
 app.use('/uploads', express.static('uploads'));
 
 app.use('/api/places', placesRouter); //=> /api/places/...
-
 app.use('/api/users', usersRoutes);
-app.use('/api/three', threeDRoutes);
-app.use('/api/tours', tourRoutes);
-app.use('/api/usertours', userTourRoutes);
-app.use('/api/counter', counterRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/useroders', userOrdersRoutes);
