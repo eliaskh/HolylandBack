@@ -18,6 +18,7 @@ const userSchema = new Schema({
   places: { type: String, required: false },
   isAdmin: { type: Boolean, required: false },
   isTourGuide: { type: Boolean, required: false },
+  phone: { type: String, required: false },
 });
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User', userSchema);

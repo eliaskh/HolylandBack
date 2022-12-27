@@ -65,6 +65,8 @@ const signUp = async (req, res, next) => {
     google,
     linkid,
     instagram,
+    phone,
+    image,
   } = req.body;
 
   let existingUser;
@@ -84,8 +86,7 @@ const signUp = async (req, res, next) => {
   const createdUser = new User({
     username,
     email,
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/b/bb/Paul_Klee_WI_%28In_Memoriam%29_1938.jpg',
+    image,
     password,
     places,
     creator,
@@ -99,6 +100,7 @@ const signUp = async (req, res, next) => {
     instagram,
     isAdmin: req.body.isAdmin ? true : false,
     isTourGuide: req.body.isTourGuide ? true : false,
+    phone,
   });
   createdUser
     .save()
@@ -174,136 +176,177 @@ const signIn = async (req, res, next) => {
 //   }
 // }
 
+// const updateUser1 = async (req, res, next) => {
+//   const { uid } = req.params;
+//   const { username } = req.body;
+//   const { name } = req.body;
+//   const { bio } = req.body;
+//   const { website } = req.body;
+//   const { twitter } = req.body;
+//   const { facebook } = req.body;
+//   const { linkid } = req.body;
+//   const { google } = req.body;
+//   const { instagram } = req.body;
+//   const { phone } = req.body;
+
+//   if (req.files) {
+//     const image = req.files.image;
+//     const { username } = req.body;
+//     const { name } = req.body;
+//     const { bio } = req.body;
+//     const { website } = req.body;
+//     const { twitter } = req.body;
+//     const { facebook } = req.body;
+//     const { linkid } = req.body;
+//     const { google } = req.body;
+//     const { instagram } = req.body;
+//     const { phone } = req.body;
+//     let imageUrl = null;
+//     cloudinary.uploader
+//       .upload(image.tempFilePath, (error, result) => {
+//         if (error) {
+//           console.log('Error', error);
+//         } else {
+//           imageUrl = result.url;
+//         }
+//       })
+//       .then(() => {
+//         User.findByIdAndUpdate(
+//           uid,
+//           {
+//             username,
+//             name,
+//             bio,
+//             website,
+//             twitter,
+//             facebook,
+//             linkid,
+//             google,
+//             instagram,
+//             image: imageUrl,
+//             phone,
+//           },
+//           { new: true }
+//         )
+//           .then((user) => {
+//             const {
+//               username,
+//               name,
+//               bio,
+//               website,
+//               twitter,
+//               facebook,
+//               linkid,
+//               google,
+//               instagram,
+//               email,
+//               image,
+//               phone,
+//             } = user;
+//             const updatedUser = {
+//               username,
+//               name,
+//               bio,
+//               website,
+//               twitter,
+//               facebook,
+//               linkid,
+//               google,
+//               instagram,
+//               email,
+//               image,
+//             };
+//             return res.json({ user: updatedUser });
+//           })
+//           .catch((error) => {
+//             return res.json({ error });
+//           });
+//       })
+//       .catch((error) => {
+//         return res.json({ error });
+//       });
+//   } else {
+//     User.findByIdAndUpdate(
+//       uid,
+//       {
+//         username,
+//         name,
+//         bio,
+//         website,
+//         twitter,
+//         facebook,
+//         linkid,
+//         google,
+//         instagram,
+//         phone,
+//       },
+//       { new: true }
+//     ).then((user) => {
+//       const {
+//         username,
+//         name,
+//         bio,
+//         website,
+//         twitter,
+//         facebook,
+//         linkid,
+//         google,
+//         instagram,
+//         email,
+//         image,
+//         phone,
+//       } = user;
+//       const updatedUser = {
+//         username,
+//         name,
+//         bio,
+//         website,
+//         twitter,
+//         facebook,
+//         linkid,
+//         google,
+//         instagram,
+//         email,
+//         image,
+//         phone,
+//       };
+//       return res.json({ user: updatedUser });
+//     });
+//   }
+// };
+
+// if there is error delete this , and rename the prviosu to be updateUser
 const updateUser = async (req, res, next) => {
-  const { uid } = req.params;
-  const { username } = req.body;
-  const { name } = req.body;
-  const { bio } = req.body;
-  const { website } = req.body;
-  const { twitter } = req.body;
-  const { facebook } = req.body;
-  const { linkid } = req.body;
-  const { google } = req.body;
-  const { instagram } = req.body;
+  const { name, bio, facebook, email, image, phone } = req.body;
+  const updatedUser = req.params.pid;
+  let user1;
+  try {
+    user1 = await User.findById(updatedUser);
+  } catch (err) {
+    console.log('Error', err);
+    const error = new HttpError(
+      'we can not update your Place details, sorry ',
+      500
+    );
+    return next(error);
+  }
 
-  if (req.files) {
-    const image = req.files.image;
-    const { username } = req.body;
-    const { name } = req.body;
-    const { bio } = req.body;
-    const { website } = req.body;
-    const { twitter } = req.body;
-    const { facebook } = req.body;
-    const { linkid } = req.body;
-    const { google } = req.body;
-    const { instagram } = req.body;
-
-    let imageUrl = null;
-    cloudinary.uploader
-      .upload(image.tempFilePath, (error, result) => {
-        if (error) {
-          console.log('Error', error);
-        } else {
-          imageUrl = result.url;
-        }
-      })
+  {
+    // (user.username = username),
+    user1.name = name;
+    user1.bio = bio;
+    user1.image = image;
+    user1.email = email;
+    user1.facebook = facebook;
+    user1.phone = phone;
+    user1
+      .save()
       .then(() => {
-        User.findByIdAndUpdate(
-          uid,
-          {
-            username,
-            name,
-            bio,
-            website,
-            twitter,
-            facebook,
-            linkid,
-            google,
-            instagram,
-            image: imageUrl,
-          },
-          { new: true }
-        )
-          .then((user) => {
-            const {
-              username,
-              name,
-              bio,
-              website,
-              twitter,
-              facebook,
-              linkid,
-              google,
-              instagram,
-              email,
-              image,
-            } = user;
-            const updatedUser = {
-              sername,
-              name,
-              bio,
-              website,
-              twitter,
-              facebook,
-              linkid,
-              google,
-              instagram,
-              email,
-              image,
-            };
-            return res.json({ user: updatedUser });
-          })
-          .catch((error) => {
-            return res.json({ error });
-          });
+        res.status(200).json({ user1: user1.toObject({ getters: true }) });
       })
       .catch((error) => {
-        return res.json({ error });
+        res.json({ error });
       });
-  } else {
-    User.findByIdAndUpdate(
-      uid,
-      {
-        username,
-        name,
-        bio,
-        website,
-        twitter,
-        facebook,
-        linkid,
-        google,
-        instagram,
-      },
-      { new: true }
-    ).then((user) => {
-      const {
-        username,
-        name,
-        bio,
-        website,
-        twitter,
-        facebook,
-        linkid,
-        google,
-        instagram,
-        email,
-        image,
-      } = user;
-      const updatedUser = {
-        username,
-        name,
-        bio,
-        website,
-        twitter,
-        facebook,
-        linkid,
-        google,
-        instagram,
-        email,
-        image,
-      };
-      return res.json({ user: updatedUser });
-    });
   }
 };
 
