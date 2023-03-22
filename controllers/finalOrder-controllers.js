@@ -175,69 +175,6 @@ const updateShop = async (req, res, next) => {
   }
 };
 
-const updateShop1 = async (req, res, next) => {
-  const {
-    considerTourLeader,
-    tourGuideName,
-    tourLeaderC,
-    tourLeaderName,
-    total,
-    productsList,
-    customerOrders,
-    userId,
-    statusofOrder,
-    sid,
-    deliveryTime,
-    deliveryDate,
-    deliveryLocation,
-    country,
-    guidePhone,
-    shopTitle,
-    note,
-  } = req.body;
-  const orderId = req.params.pid;
-  let order;
-  try {
-    order = await FinalOrder.findById(orderId);
-  } catch (err) {
-    console.log('Error', err);
-    const error = new HttpError(
-      'we can not update your Place details, sorry ',
-      500
-    );
-    return next(error);
-  }
-
-  {
-    order.considerTourLeader = considerTourLeader;
-    order.tourGuideName = tourGuideName;
-    order.tourLeaderC = tourLeaderC;
-    order.tourLeaderName = tourLeaderName;
-    order.total = total;
-    order.productsList = productsList;
-    order.customerOrders = customerOrders;
-    order.userId = userId;
-    order.statusofOrder = statusofOrder;
-    order.sid = sid;
-    order.deliveryTime = deliveryTime;
-    order.deliveryDate = deliveryDate;
-    order.deliveryLocation = deliveryLocation;
-    order.country = country;
-    order.guidePhone = guidePhone;
-    order.shopTitle = shopTitle;
-    order.note = note;
-
-    order
-      .save()
-      .then(() => {
-        res.status(200).json({ order: order.toObject({ getters: true }) });
-      })
-      .catch((error) => {
-        res.json({ error });
-      });
-  }
-};
-
 const updateFinalOrderStatus = async (req, res, next) => {
   const { statusofOrder, note } = req.body;
   const orderId = req.params.pid;
