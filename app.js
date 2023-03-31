@@ -14,6 +14,7 @@ const AppPort = process.env.PORT || 5000;
 const HttpError = require('./models/http-error');
 
 const fileUpload = require('express-fileupload');
+// app.use(express.json({ limit: '50mb' }));
 app.use(express.json({ limit: '50mb' }));
 app.use(bodyParser.json());
 
