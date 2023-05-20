@@ -52,6 +52,11 @@ app.use('/api/product', productRoutes);
 app.use('/api/useroders', userOrdersRoutes);
 app.use('/api/finalorder', finalOrderRoutes);
 
+
+app.get('/', (req, res) => {
+  res.send('Server Running')
+})
+
 app.use((req, res, next) => {
   const error = new HttpError('Could not find this route', 404);
   throw error;
