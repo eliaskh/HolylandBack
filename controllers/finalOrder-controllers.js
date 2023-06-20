@@ -91,7 +91,7 @@ const updateFinalOrder = async (req, res, next) => {
     );
     return next(error);
   }
-  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>.")
+
   {
     order.deliveryTime = deliveryTime;
     order.deliveryDate = deliveryDate;
