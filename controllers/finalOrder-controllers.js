@@ -97,8 +97,7 @@ const updateFinalOrder = async (req, res, next) => {
     order.deliveryDate = deliveryDate;
     order.deliveryLocation = deliveryLocation;
     order.guidePhone = guidePhone;
-    // order.customerOrders = customerOrders;
-    order.customerOrders = [...order.customerOrders, ...customerOrders];
+    order.customerOrders = customerOrders;
     order.statusofOrder = statusofOrder;
     order.total = total;
     // order.country = country;
