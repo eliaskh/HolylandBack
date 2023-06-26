@@ -46,8 +46,6 @@ app.use(
   })
 );
 
-app.use('/uploads', express.static('uploads'));
-
 app.use('/api/places', placesRouter); //=> /api/places/...
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', orderRoutes);
